@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:paddingBottom="56dp"> <!-- Leave space for bottom nav -->
+
+    <!-- Search bar -->
+    <LinearLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#1E1E1E"
+        android:padding="8dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:backgroundTint="@null"
+        android:layout_marginBottom="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:layout_marginTop="16dp"
+        android:radius="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_search"
+            android:tint="#CCCCCC"
+            android:contentDescription="Search Icon" />
+
+        <EditText
+            android:id="@+id/editSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Find cities"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:paddingStart="8dp"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <!-- Filters Section -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchBar"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Filter buttons -->
+            <Button
+                android:id="@+id/btnDifficulty"
+                style="@style/FilterButtonStyle"
+                android:text="Difficulty" />
+
+            <Button
+                android:id="@+id/btnLength"
+                style="@style/FilterButtonStyle"
+                android:text="Length" />
+
+            <Button
+                android:id="@+id/btnElevation"
+                style="@style/FilterButtonStyle"
+                android:text="Elevation gain" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Label & sort -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchBar"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtTrailsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 trails"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnSort"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="auto"
+            android:background="#2C2F30"
+            android:text="AllTrails sort ▼"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_gravity="end"
+            android:gravity="center"
+            style="@style/RoundedButton"/>
+    </LinearLayout>
+
+    <!-- Scrollable attraction cards -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnSort"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="72dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:id="@+id/linAttractionsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1E1E1E"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Example nav buttons -->
+
+        <Button
+            android:id="@+id/btnExplore"
+            style="@style/BottomNavButton"
+            android:text="Explore"
+            android:drawableTop="@android:drawable/ic_menu_search" />
+
+        <Button
+            android:id="@+id/btnSaved"
+            style="@style/BottomNavButton"
+            android:text="Saved"
+            android:drawableTop="@android:drawable/ic_menu_save" />
+
+        <Button
+            android:id="@+id/btnNavigate"
+            style="@style/BottomNavButton"
+            android:text="Navigate"
+            android:drawableTop="@android:drawable/ic_menu_compass" />
+
+        <Button
+            android:id="@+id/btnActivity"
+            style="@style/BottomNavButton"
+            android:text="Activity"
+            android:drawableTop="@android:drawable/ic_menu_agenda" />
+
+        <Button
+            android:id="@+id/btnProfile"
+            style="@style/BottomNavButton"
+            android:text="Profile"
+            android:drawableTop="@android:drawable/ic_menu_myplaces" />
+    </LinearLayout>
+
+</RelativeLayout>
