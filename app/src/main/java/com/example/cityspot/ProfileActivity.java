@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button btnExplore, btnSaved, btnProfile;
+    private Button btnExplore, btnSaved, btnProfile, btnMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnExplore = findViewById(R.id.btnExplore);
         btnSaved = findViewById(R.id.btnSaved);
         btnProfile = findViewById(R.id.btnProfile);
+        btnMap = findViewById(R.id.btnMap);
 
         btnExplore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfileActivity.this, SavedActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, MapActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
