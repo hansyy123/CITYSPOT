@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout btnApple, btnGoogle, btnFacebook;
     private androidx.appcompat.widget.AppCompatButton btnLogin;
     private android.widget.TextView txtSignup;
+    private android.widget.EditText editEmail, editPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
         btnFacebook = findViewById(R.id.btnFacebook);
         btnLogin = findViewById(R.id.btnLogin);
         txtSignup = findViewById(R.id.txtSignup);
+        editEmail = findViewById(R.id.editEmail);
+        editPassword = findViewById(R.id.editPassword);
+
+        // Check if we came from RegisterActivity
+        String registeredUser = getIntent().getStringExtra("username");
+        if (registeredUser != null) {
+            editEmail.setText(registeredUser); // Just for demo, usually it's email
+        }
 
         btnApple.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +58,12 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                String email = editEmail.getText().toString();
+                if (email.isEmpty()) {
+                    navigateToExplore("User");
+                } else {
+                    navigateToExplore(email);
+                }
             }
         });
 
@@ -64,9 +77,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigateToExplore(String username) {
+        // Save username to SharedPreferences for persistence
+        getSharedPreferences("CitySpotPrefs", MODE_PRIVATE)
+                .edit()
+                .putString("username", username)
+                .apply();
+
         Toast.makeText(this, "Logged in via " + username, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, ExploreActivity.class);
-        intent.putExtra("username", username);
         startActivity(intent);
         finish();
     }

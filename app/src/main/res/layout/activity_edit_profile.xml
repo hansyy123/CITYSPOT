@@ -3,58 +3,97 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="#43523D">
+    android:background="#43523D"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Profile"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginTop="48dp"
+            android:layout_gravity="center"/>
 
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update your account information"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"/>
+
+        <!-- Username label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="32dp"/>
+
+        <!-- Username EditText -->
         <EditText
             android:id="@+id/editUsername"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Username"
+            android:layout_marginTop="8dp"
             android:background="@drawable/btn_light_rounded"
+            android:hint="Enter your username"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textColor="#000000"
-            android:layout_marginBottom="16dp"/>
+            android:inputType="textPersonName"/>
 
+        <!-- Password label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Password EditText -->
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/editPassword"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:layout_marginTop="8dp"
             android:background="@drawable/btn_light_rounded"
+            android:hint="Enter your new password"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textColor="#000000"
-            android:layout_marginBottom="32dp"/>
+            android:inputType="textPassword"/>
 
-        <Button
+        <!-- Save Button -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Save"
+            android:text="Save Changes"
+            android:textSize="18sp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/btn_dark_rounded" />
+            android:background="@drawable/btn_dark_rounded"
+            android:layout_marginTop="32dp"/>
 
-        <Button
+        <!-- Cancel Button -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="Cancel"
+            android:textSize="18sp"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_dark_rounded"
             android:layout_marginTop="16dp"/>

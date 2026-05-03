@@ -42,10 +42,7 @@ public class ExploreActivity extends AppCompatActivity {
         setupSaveButtons();
         setupSearch();
 
-        String username = getIntent().getStringExtra("username");
-        if (username != null && !username.isEmpty()) {
-            txtExploreTitle.setText("Welcome, " + username + "!");
-        }
+        updateWelcomeMessage();
 
         btnSaved.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +147,19 @@ public class ExploreActivity extends AppCompatActivity {
         );
         findViewById(R.id.cardTrail3).setOnClickListener(click3);
         findViewById(R.id.imgContainer3).setOnClickListener(click3);
+    }
+
+    private void updateWelcomeMessage() {
+        SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);
+        String username = prefs.getString("username", "User");
+        txtExploreTitle.setText("Welcome, " + username + "!");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Update the welcome message in case the username was changed in EditProfileActivity
+        updateWelcomeMessage();
     }
 
     private void openDetail(String name, String sub, String dist, String elev, String time) {

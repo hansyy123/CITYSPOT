@@ -3,31 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="#43523D">
+    android:background="#43523D"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Settings"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginTop="48dp"
+            android:layout_gravity="center"/>
 
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configure your preferences"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"/>
+
+        <!-- Notifications -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_dark_rounded"
             android:gravity="center_vertical"
-            android:layout_marginBottom="24dp">
-
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,20 +48,23 @@
                 android:text="Enable Notifications"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
-
             <Switch
                 android:id="@+id/switchNotifications"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:thumbTint="#FFFFFF"
+                android:trackTint="#888888"/>
         </LinearLayout>
 
+        <!-- Dark Mode -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_dark_rounded"
             android:gravity="center_vertical"
-            android:layout_marginBottom="24dp">
-
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -56,29 +72,35 @@
                 android:text="Dark Mode"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
-
             <Switch
                 android:id="@+id/switchDarkMode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:thumbTint="#FFFFFF"
+                android:trackTint="#888888"/>
         </LinearLayout>
 
-        <Button
+        <!-- Save Button -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Save"
+            android:text="Save Settings"
+            android:textSize="18sp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/btn_dark_rounded" />
+            android:background="@drawable/btn_dark_rounded"
+            android:layout_marginTop="32dp"/>
 
-        <Button
+        <!-- Cancel Button -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="Cancel"
+            android:textSize="18sp"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_dark_rounded"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 </ScrollView>

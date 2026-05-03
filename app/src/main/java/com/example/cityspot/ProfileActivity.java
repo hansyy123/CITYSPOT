@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button btnLogout, btnEditProfile, btnSettings;
+    private Button btnLogout, btnEditProfile, btnSettings, btnSaved, btnProfile, btnMap, btnExplore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,10 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         btnEditProfile = findViewById(R.id.editProfileButton);
         btnSettings = findViewById(R.id.settingsButton);
+        btnSaved = findViewById(R.id.btnSaved);
+        btnProfile = findViewById(R.id.btnProfile);
+        btnMap = findViewById(R.id.btnMap);
+        btnExplore = findViewById(R.id.btnExplore);
 
         // Logout button
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -27,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ProfileActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
@@ -51,5 +55,36 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnSaved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, SavedActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Already in ProfileActivity
+            }
+        });
+
+        btnExplore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, ExploreActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, MapActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
     }
-}
+    }
