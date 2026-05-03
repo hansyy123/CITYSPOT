@@ -20,7 +20,7 @@ public class ExploreActivity extends AppCompatActivity {
         btnExplore = findViewById(R.id.btnExplore);
         btnSaved = findViewById(R.id.btnSaved);
         btnProfile = findViewById(R.id.btnProfile);
-        txtExploreTitle = findViewById(R.id.exploreTitle); // Note: I need to add this ID to activity_explore.xml
+        txtExploreTitle = findViewById(R.id.exploreTitle);
 
         String username = getIntent().getStringExtra("username");
         if (username != null && !username.isEmpty()) {

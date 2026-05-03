@@ -13,6 +13,18 @@
         android:orientation="vertical"
         android:layout_above="@id/bottomNav">
 
+        <TextView
+            android:id="@+id/exploreTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp" />
+
         <!-- Search bar -->
         <LinearLayout
             android:id="@+id/searchBar"
