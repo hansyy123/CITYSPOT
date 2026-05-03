@@ -26,6 +26,15 @@
         <!-- Menu Activity -->
         <activity android:name=".MenuActivity" />
 
+        <!-- Explore Activity -->
+        <activity android:name=".ExploreActivity" />
+
+        <!-- Saved Activity -->
+        <activity android:name=".SavedActivity" />
+
+        <!-- Profile Activity -->
+        <activity android:name=".ProfileActivity" />
+
         <!-- Detail Activity -->
         <activity android:name=".DetailActivity" />
 

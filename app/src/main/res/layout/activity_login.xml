@@ -91,6 +91,47 @@
             android:background="@drawable/btn_dark_rounded"
             android:layout_marginTop="32dp"/>
 
+        <!-- Divider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical">
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#FFFFFF" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="or" android:textColor="#FFFFFF" android:padding="12dp" />
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Social Buttons -->
+        <LinearLayout
+            android:id="@+id/btnApple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_dark_rounded"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/apple" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Apple" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_dark_rounded"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/google" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Google" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
+        </LinearLayout>
+
         <!-- Sign Up prompt -->
         <TextView
             android:id="@+id/txtSignup"

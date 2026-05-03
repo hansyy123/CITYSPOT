@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editEmail, editPassword;
     private Button btnLogin;
     private TextView txtSignup;
+    private LinearLayout btnApple, btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +28,12 @@ public class LoginActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnLogin);
         txtSignup = findViewById(R.id.txtSignup);
+        btnApple = findViewById(R.id.btnApple);
+        btnGoogle = findViewById(R.id.btnGoogle);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // Get input
                 String email = editEmail.getText().toString().trim();
                 String password = editPassword.getText().toString().trim();
@@ -46,24 +49,38 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // For demonstration: accept any non-empty email/password as valid
-                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                // Navigate to MenuActivity and pass username (email before '@')
                 String username = email.split("@")[0];
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                intent.putExtra("username", username);
-                startActivity(intent);
-                finish();
+                navigateToMenu(username);
+            }
+        });
+
+        btnApple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToMenu("Apple User");
+            }
+        });
+
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToMenu("Google User");
             }
         });
 
         txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(LoginActivity.this, "Sign Up clicked (not implemented)", Toast.LENGTH_SHORT).show();
-                // TODO: Implement sign up logic or open sign up activity
             }
         });
+    }
+
+    private void navigateToMenu(String username) {
+        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LoginActivity.this, ExploreActivity.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
+        finish();
     }
 }

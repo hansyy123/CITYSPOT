@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@id/bottomNav">
+
+        <!-- Search bar -->
+        <LinearLayout
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_search_bar"
+            android:padding="8dp"
+            android:layout_margin="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="#CCCCCC"
+                android:contentDescription="Search Icon" />
+
+            <EditText
+                android:id="@+id/editSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Find cities"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:paddingStart="8dp"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <!-- Filters -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_manage"
+                app:tint="#FFFFFF"
+                android:layout_marginEnd="12dp" />
+
+            <HorizontalScrollView
+                android:id="@+id/filtersScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button style="@style/FilterButtonStyle" android:text="Difficulty" />
+                    <Button style="@style/FilterButtonStyle" android:text="Length" />
+                    <Button style="@style/FilterButtonStyle" android:text="Elevation gain" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Stats row -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:id="@+id/txtTrailsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20 trails"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_centerVertical="true" />
+
+            <Button
+                android:id="@+id/btnSort"
+                style="@style/RoundedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:text="AllTrails sort ▼"
+                android:textSize="12sp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
+            <LinearLayout
+                android:id="@+id/exploreContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Trail Card Example -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="#121212"
+                    android:layout_marginBottom="24dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Image Stack -->
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/logo"
+                                android:background="#1E1E1E"/>
+
+                            <ImageButton
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="12dp"
+                                android:background="@drawable/bg_search_bar"
+                                android:src="@android:drawable/ic_menu_save"
+                                app:tint="#FFFFFF"
+                                android:padding="8dp"/>
+
+                            <!-- Map Preview -->
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="bottom|end"
+                                android:layout_margin="12dp"
+                                app:cardCornerRadius="12dp">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@android:drawable/ic_dialog_map"
+                                    android:scaleType="centerCrop"
+                                    android:background="#333333"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Indicators -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="12dp"
+                                android:orientation="horizontal">
+                                <View android:layout_width="6dp" android:layout_height="6dp" android:background="#FFFFFF" android:layout_margin="2dp" />
+                                <View android:layout_width="6dp" android:layout_height="6dp" android:background="#88FFFFFF" android:layout_margin="2dp" />
+                                <View android:layout_width="6dp" android:layout_height="6dp" android:background="#88FFFFFF" android:layout_margin="2dp" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <!-- Content below image -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:id="@+id/txtTrailName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mount Pulunbato"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:src="@android:drawable/stat_sys_download"
+                                app:tint="#FFFFFF" />
+
+                            <TextView
+                                android:id="@+id/txtLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txtTrailName"
+                                android:text="Zamboanga City, Zamboanga Sibugay, Philippines"
+                                android:textColor="#CCCCCC"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txtLocation"
+                                android:layout_marginTop="4dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@android:drawable/btn_star_big_on" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" 3.7 (2)  •  " android:textColor="#CCCCCC" android:textSize="12sp" />
+                                <View android:layout_width="12dp" android:layout_height="12dp" android:background="#FFA500" android:layout_marginEnd="4dp" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Moderate  •  18 km  •  Est. 4h 17m" android:textColor="#CCCCCC" android:textSize="12sp" />
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Floating Map Button -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/bottomNav"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_search_bar"
+        android:backgroundTint="#A5D6A7"
+        android:text="Map"
+        android:textColor="#000000"
+        android:drawableStart="@android:drawable/ic_dialog_map"
+        android:drawablePadding="8dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textAllCaps="false" />
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1E1E1E"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button android:id="@+id/btnExplore" style="@style/BottomNavButton" android:text="Explore" android:drawableTop="@android:drawable/ic_menu_search" />
+        <Button android:id="@+id/btnSaved" style="@style/BottomNavButton" android:text="Saved" android:drawableTop="@android:drawable/ic_menu_save" />
+        <Button android:id="@+id/btnNavigate" style="@style/BottomNavButton" android:text="Navigate" android:drawableTop="@android:drawable/ic_menu_compass" />
+        <Button android:id="@+id/btnActivity" style="@style/BottomNavButton" android:text="Activity" android:drawableTop="@android:drawable/ic_menu_agenda" />
+        <Button android:id="@+id/btnProfile" style="@style/BottomNavButton" android:text="Profile" android:drawableTop="@android:drawable/ic_menu_myplaces" />
+    </LinearLayout>
+
+</RelativeLayout>

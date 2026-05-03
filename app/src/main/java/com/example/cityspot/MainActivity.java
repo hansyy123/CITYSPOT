@@ -26,31 +26,38 @@ public class MainActivity extends AppCompatActivity {
         btnApple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Continue with Apple clicked", Toast.LENGTH_SHORT).show();
+                navigateToMenu("Apple User");
             }
         });
 
         btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Continue with Google clicked", Toast.LENGTH_SHORT).show();
+                navigateToMenu("Google User");
             }
         });
 
         btnFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Continue with Facebook clicked", Toast.LENGTH_SHORT).show();
+                navigateToMenu("Facebook User");
             }
         });
 
         btnEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Continue with Email clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    private void navigateToMenu(String username) {
+        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, ExploreActivity.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
+        finish();
     }
 }

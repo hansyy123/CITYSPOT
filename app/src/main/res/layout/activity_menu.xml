@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212"
@@ -12,30 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:background="#1E1E1E"
+        android:background="@drawable/bg_search_bar"
         android:padding="8dp"
         android:layout_margin="16dp"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
-        android:backgroundTint="@null"
-        android:layout_marginBottom="8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_vertical"
         android:clipToPadding="false"
         android:clipChildren="false"
-        android:layout_marginTop="16dp"
-        android:radius="24dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         >
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@android:drawable/ic_menu_search"
-            android:tint="#CCCCCC"
+            app:tint="#CCCCCC"
             android:contentDescription="Search Icon" />
 
         <EditText
@@ -53,6 +44,7 @@
 
     <!-- Filters Section -->
     <HorizontalScrollView
+        android:id="@+id/filtersScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/searchBar"
@@ -86,10 +78,11 @@
 
     <!-- Label & sort -->
     <LinearLayout
+        android:id="@+id/sortLabelContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/searchBar"
-        android:layout_marginTop="56dp"
+        android:layout_below="@id/filtersScrollView"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
@@ -97,8 +90,9 @@
 
         <TextView
             android:id="@+id/txtTrailsCount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="20 trails"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
@@ -107,7 +101,6 @@
             android:id="@+id/btnSort"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:layout_marginStart="auto"
             android:background="#2C2F30"
             android:text="AllTrails sort ▼"
             android:textColor="#FFFFFF"
@@ -124,7 +117,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/btnSort"
+        android:layout_below="@id/sortLabelContainer"
         android:layout_marginTop="8dp"
         android:paddingBottom="72dp"
         android:clipToPadding="false">
@@ -149,8 +142,6 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <!-- Example nav buttons -->
-
         <Button
             android:id="@+id/btnExplore"
             style="@style/BottomNavButton"
@@ -162,18 +153,6 @@
             style="@style/BottomNavButton"
             android:text="Saved"
             android:drawableTop="@android:drawable/ic_menu_save" />
-
-        <Button
-            android:id="@+id/btnNavigate"
-            style="@style/BottomNavButton"
-            android:text="Navigate"
-            android:drawableTop="@android:drawable/ic_menu_compass" />
-
-        <Button
-            android:id="@+id/btnActivity"
-            style="@style/BottomNavButton"
-            android:text="Activity"
-            android:drawableTop="@android:drawable/ic_menu_agenda" />
 
         <Button
             android:id="@+id/btnProfile"
