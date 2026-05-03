@@ -1,46 +1,54 @@
 package com.example.cityspot;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button btnExplore, btnSaved, btnProfile, btnMap;
+    private Button btnLogout, btnEditProfile, btnSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        btnExplore = findViewById(R.id.btnExplore);
-        btnSaved = findViewById(R.id.btnSaved);
-        btnProfile = findViewById(R.id.btnProfile);
-        btnMap = findViewById(R.id.btnMap);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnEditProfile = findViewById(R.id.editProfileButton);
+        btnSettings = findViewById(R.id.settingsButton);
 
-        btnExplore.setOnClickListener(new View.OnClickListener() {
+        // Logout button
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, ExploreActivity.class));
-                overridePendingTransition(0, 0);
+            public void onClick(View view) {
+                Toast.makeText(ProfileActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             }
         });
 
-        btnSaved.setOnClickListener(new View.OnClickListener() {
+        // Navigate to EditProfile
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, SavedActivity.class));
-                overridePendingTransition(0, 0);
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                startActivity(intent);
             }
         });
 
-        btnMap.setOnClickListener(new View.OnClickListener() {
+        // Navigate to Settings
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, MapActivity.class));
-                overridePendingTransition(0, 0);
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }

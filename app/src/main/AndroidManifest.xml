@@ -45,13 +45,17 @@
         <activity android:name=".MapActivity" />
 
         <!-- Profile Activity -->
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity" android:exported="false" />
 
         <!-- Detail Activity -->
         <activity android:name=".DetailActivity" />
 
         <!-- About Activity -->
         <activity android:name=".AboutActivity" />
+
+        <activity android:name=".EditProfileActivity" android:exported="false" />
+
+        <activity android:name=".SettingsActivity" android:exported="false" />
 
     </application>
 
