@@ -11,7 +11,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout btnApple, btnGoogle, btnFacebook;
-    private Button btnEmail;
+    private androidx.appcompat.widget.AppCompatButton btnLogin;
+    private android.widget.TextView txtSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,40 +22,49 @@ public class MainActivity extends AppCompatActivity {
         btnApple = findViewById(R.id.btnApple);
         btnGoogle = findViewById(R.id.btnGoogle);
         btnFacebook = findViewById(R.id.btnFacebook);
-        btnEmail = findViewById(R.id.btnEmail);
+        btnLogin = findViewById(R.id.btnLogin);
+        txtSignup = findViewById(R.id.txtSignup);
 
         btnApple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToMenu("Apple User");
+                navigateToExplore("Apple User");
             }
         });
 
         btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToMenu("Google User");
+                navigateToExplore("Google User");
             }
         });
 
         btnFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToMenu("Facebook User");
+                navigateToExplore("Facebook User");
             }
         });
 
-        btnEmail.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+
+        txtSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void navigateToMenu(String username) {
-        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+    private void navigateToExplore(String username) {
+        Toast.makeText(this, "Logged in via " + username, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, ExploreActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);

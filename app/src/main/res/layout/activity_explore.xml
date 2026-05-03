@@ -7,126 +7,124 @@
     android:background="#121212">
 
     <!-- Content -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_above="@id/bottomNav">
 
-        <TextView
-            android:id="@+id/exploreTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Explore"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="16dp" />
-
-        <!-- Search bar -->
-        <LinearLayout
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_search_bar"
-            android:padding="8dp"
-            android:layout_margin="16dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="#CCCCCC"
-                android:contentDescription="Search Icon" />
-
-            <EditText
-                android:id="@+id/editSearch"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="Find cities"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#888888"
-                android:paddingStart="8dp"
-                android:inputType="text" />
-        </LinearLayout>
-
-        <!-- Filters -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_manage"
-                app:tint="#FFFFFF"
-                android:layout_marginEnd="12dp" />
-
-            <HorizontalScrollView
-                android:id="@+id/filtersScrollView"
+            <!-- Title & User Profile Mini -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/exploreTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Explore"
+                    android:textColor="#FFFFFF"
+                    android:textSize="28sp"
+                    android:fontFamily="sans-serif-black" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#2C2C2C">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@android:drawable/ic_menu_myplaces"
+                        android:padding="8dp"
+                        app:tint="#FFFFFF"/>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <!-- Modern Search Bar -->
+            <LinearLayout
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_search_modern"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:tint="#888888" />
+
+                <EditText
+                    android:id="@+id/editSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Search trails, cities..."
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#555555"
+                    android:paddingStart="12dp"
+                    android:textSize="15sp"
+                    android:inputType="text" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_manage"
+                    app:tint="#A5D6A7" />
+            </LinearLayout>
+
+            <!-- Category Chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:scrollbars="none">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Button style="@style/FilterButtonStyle" android:text="Difficulty" />
-                    <Button style="@style/FilterButtonStyle" android:text="Length" />
-                    <Button style="@style/FilterButtonStyle" android:text="Elevation gain" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔥 Popular" android:textColor="#000000" android:background="@drawable/btn_green_rounded" android:paddingHorizontal="16dp" android:paddingVertical="8dp" android:layout_marginEnd="10dp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⛰️ Mountain" android:textColor="#FFFFFF" android:background="@drawable/bg_filter_chip" android:paddingHorizontal="16dp" android:paddingVertical="8dp" android:layout_marginEnd="10dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌳 Forest" android:textColor="#FFFFFF" android:background="@drawable/bg_filter_chip" android:paddingHorizontal="16dp" android:paddingVertical="8dp" android:layout_marginEnd="10dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏖️ Coastal" android:textColor="#FFFFFF" android:background="@drawable/bg_filter_chip" android:paddingHorizontal="16dp" android:paddingVertical="8dp"/>
                 </LinearLayout>
             </HorizontalScrollView>
-        </LinearLayout>
-
-        <!-- Stats row -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
 
             <TextView
-                android:id="@+id/txtTrailsCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20 trails"
+                android:text="Nearby You"
                 android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_centerVertical="true" />
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="sans-serif-medium"/>
 
-            <Button
-                android:id="@+id/btnSort"
-                style="@style/RoundedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:text="AllTrails sort ▼"
-                android:textSize="12sp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp" />
-        </RelativeLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
             <LinearLayout
                 android:id="@+id/exploreContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <!-- Trail Card Example 1 -->
                 <androidx.cardview.widget.CardView
@@ -162,6 +160,7 @@
                                 android:contentDescription="Trail Image" />
 
                             <ImageButton
+                                android:id="@+id/btnSaveTrail1"
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:layout_gravity="top|end"
@@ -272,6 +271,18 @@
                                 android:src="@drawable/img"
                                 android:background="#1E1E1E"
                                 android:contentDescription="Trail Image" />
+
+                            <ImageButton
+                                android:id="@+id/btnSaveTrail2"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="12dp"
+                                android:background="@drawable/bg_search_bar"
+                                android:src="@android:drawable/ic_menu_save"
+                                app:tint="#FFFFFF"
+                                android:padding="8dp"
+                                android:contentDescription="Save" />
                         </FrameLayout>
 
                         <LinearLayout
@@ -329,6 +340,18 @@
                                 android:src="@drawable/img_1"
                                 android:background="#1E1E1E"
                                 android:contentDescription="Trail Image" />
+
+                            <ImageButton
+                                android:id="@+id/btnSaveTrail3"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="12dp"
+                                android:background="@drawable/bg_search_bar"
+                                android:src="@android:drawable/ic_menu_save"
+                                app:tint="#FFFFFF"
+                                android:padding="8dp"
+                                android:contentDescription="Save" />
                         </FrameLayout>
 
                         <LinearLayout
@@ -357,8 +380,8 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <!-- Bottom Navigation Bar -->
     <LinearLayout

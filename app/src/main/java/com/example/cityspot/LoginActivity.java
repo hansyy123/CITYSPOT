@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText editEmail, editPassword;
+    private EditText editUsername, editPassword;
     private Button btnLogin;
     private TextView txtSignup;
     private LinearLayout btnApple, btnGoogle;
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editEmail = findViewById(R.id.editEmail);
+        editUsername = findViewById(R.id.editUsername);
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnLogin);
         txtSignup = findViewById(R.id.txtSignup);
@@ -35,12 +35,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Get input
-                String email = editEmail.getText().toString().trim();
+                String username = editUsername.getText().toString().trim();
                 String password = editPassword.getText().toString().trim();
 
                 // Validate empty fields
-                if(TextUtils.isEmpty(email)) {
-                    Toast.makeText(LoginActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(username)) {
+                    Toast.makeText(LoginActivity.this, "Please enter your username", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password)) {
@@ -48,8 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                // For demonstration: accept any non-empty email/password as valid
-                String username = email.split("@")[0];
+                // For demonstration: accept any non-empty username/password as valid
                 navigateToMenu(username);
             }
         });
@@ -71,13 +70,14 @@ public class LoginActivity extends AppCompatActivity {
         txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Sign Up clicked (not implemented)", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     private void navigateToMenu(String username) {
-        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginActivity.this, ExploreActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);

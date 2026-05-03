@@ -13,10 +13,10 @@
 
         <!-- Title -->
         <TextView
-            android:id="@+id/txtLoginTitle"
+            android:id="@+id/txtRegisterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Create Account"
             android:textColor="#FFFFFF"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -25,18 +25,16 @@
 
         <!-- Subtitle -->
         <TextView
-            android:id="@+id/txtLoginSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please enter your credentials"
+            android:text="Join the CitySpot community"
             android:textColor="#CCCCCC"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_gravity="center"/>
 
-        <!-- Username label -->
+        <!-- Name label -->
         <TextView
-            android:id="@+id/lblUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
@@ -44,22 +42,41 @@
             android:textSize="14sp"
             android:layout_marginTop="32dp"/>
 
-        <!-- Username EditText -->
         <EditText
-            android:id="@+id/editUsername"
+            android:id="@+id/editRegName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your username"
+            android:hint="Enter your full name"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textColor="#000000"
-            android:inputType="text"/>
+            android:inputType="textPersonName"/>
+
+        <!-- Email label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/editRegEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_light_rounded"
+            android:hint="Enter your email"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
+            android:inputType="textEmailAddress"/>
 
         <!-- Password label -->
         <TextView
-            android:id="@+id/lblPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password"
@@ -67,77 +84,35 @@
             android:textSize="14sp"
             android:layout_marginTop="16dp"/>
 
-        <!-- Password EditText -->
         <EditText
-            android:id="@+id/editPassword"
+            android:id="@+id/editRegPassword"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your password"
+            android:hint="Create a password"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textColor="#000000"
             android:inputType="textPassword"/>
 
-        <!-- Login Button -->
+        <!-- Register Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnRegisterSubmit"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Login"
+            android:text="Sign Up"
             android:textSize="18sp"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_dark_rounded"
             android:layout_marginTop="32dp"/>
 
-        <!-- Divider -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp"
-            android:gravity="center_vertical">
-            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#FFFFFF" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="or" android:textColor="#FFFFFF" android:padding="12dp" />
-            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#FFFFFF" />
-        </LinearLayout>
-
-        <!-- Social Buttons -->
-        <LinearLayout
-            android:id="@+id/btnApple"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/btn_dark_rounded"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/apple" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Apple" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btnGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/btn_dark_rounded"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/google" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Google" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
-        </LinearLayout>
-
-        <!-- Sign Up prompt -->
+        <!-- Back to Login -->
         <TextView
-            android:id="@+id/txtSignup"
+            android:id="@+id/txtBackToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Sign Up"
+            android:text="Already have an account? Login"
             android:textColor="#CCCCCC"
             android:textSize="14sp"
             android:layout_marginTop="24dp"

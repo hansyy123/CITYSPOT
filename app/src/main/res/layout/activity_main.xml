@@ -1,172 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#43523D"
     android:padding="24dp">
 
-    <!-- App logo (small centered) -->
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/logo"
-        android:contentDescription="App Icon" />
-
-    <!-- Title Text -->
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign up or log in to start exploring"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_below="@id/imgLogo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-medium" />
-
-    <!-- Apple button container -->
     <LinearLayout
-        android:id="@+id/btnApple"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/txtTitle"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/btn_dark_rounded"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/apple"
-            android:contentDescription="Apple Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue with Apple"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-medium" />
-    </LinearLayout>
-
-    <!-- Google button container -->
-    <LinearLayout
-        android:id="@+id/btnGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/btnApple"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_dark_rounded"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/google"
-            android:contentDescription="Google Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue with Google"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-medium" />
-    </LinearLayout>
-
-    <!-- Facebook button container -->
-    <LinearLayout
-        android:id="@+id/btnFacebook"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/btnGoogle"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_dark_rounded"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/facebook"
-            android:contentDescription="Facebook Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue with Facebook"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-medium" />
-    </LinearLayout>
-
-    <!-- Divider with "or" -->
-    <LinearLayout
-        android:id="@+id/layoutDivider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/btnFacebook"
-        android:layout_marginTop="24dp"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF" />
-
+        <!-- Title -->
         <TextView
+            android:id="@+id/txtLoginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="or"
+            android:text="Login"
             android:textColor="#FFFFFF"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:textSize="14sp" />
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="48dp"
+            android:layout_gravity="center"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF" />
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/txtLoginSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter your credentials"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"/>
+
+        <!-- Email label -->
+        <TextView
+            android:id="@+id/lblEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="32dp"/>
+
+        <!-- Email EditText -->
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_light_rounded"
+            android:hint="Enter your email"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
+            android:inputType="textEmailAddress"/>
+
+        <!-- Password label -->
+        <TextView
+            android:id="@+id/lblPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Password EditText -->
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_light_rounded"
+            android:hint="Enter your password"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
+            android:inputType="textPassword"/>
+
+        <!-- Login Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Login"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_dark_rounded"
+            android:layout_marginTop="32dp"/>
+
+        <!-- Divider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical">
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#FFFFFF" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="or" android:textColor="#FFFFFF" android:padding="12dp" />
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Social Buttons -->
+        <LinearLayout
+            android:id="@+id/btnApple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_dark_rounded"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/apple" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Apple" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_dark_rounded"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/google" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Google" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_dark_rounded"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/facebook" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue with Facebook" android:textColor="#FFFFFF" android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Sign Up prompt -->
+        <TextView
+            android:id="@+id/txtSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Sign Up"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:textStyle="bold"/>
+
     </LinearLayout>
-
-    <!-- Continue with Email Button -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEmail"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/layoutDivider"
-        android:layout_marginTop="24dp"
-        android:text="Continue with email"
-        android:textColor="#000000"
-        android:background="@drawable/btn_light_rounded"
-        android:backgroundTint="@null"
-        android:textSize="16sp"
-        android:textAllCaps="false"/>
-
-</RelativeLayout>
+</ScrollView>

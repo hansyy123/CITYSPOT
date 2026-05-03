@@ -1,47 +1,81 @@
 package com.example.cityspot;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SavedActivity extends AppCompatActivity {
 
     private Button btnExplore, btnSaved, btnProfile, btnMap;
+    private LinearLayout savedContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved);
 
+        savedContainer = findViewById(R.id.savedContainer);
         btnExplore = findViewById(R.id.btnExplore);
         btnSaved = findViewById(R.id.btnSaved);
         btnProfile = findViewById(R.id.btnProfile);
         btnMap = findViewById(R.id.btnMap);
 
-        btnExplore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SavedActivity.this, ExploreActivity.class));
-                overridePendingTransition(0, 0);
-            }
+        loadSavedTrails();
+
+        btnExplore.setOnClickListener(v -> {
+            startActivity(new Intent(SavedActivity.this, ExploreActivity.class));
+            overridePendingTransition(0, 0);
         });
 
-        btnProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SavedActivity.this, ProfileActivity.class));
-                overridePendingTransition(0, 0);
-            }
+        btnProfile.setOnClickListener(v -> {
+            startActivity(new Intent(SavedActivity.this, ProfileActivity.class));
+            overridePendingTransition(0, 0);
         });
 
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SavedActivity.this, MapActivity.class));
-                overridePendingTransition(0, 0);
-            }
+        btnMap.setOnClickListener(v -> {
+            startActivity(new Intent(SavedActivity.this, MapActivity.class));
+            overridePendingTransition(0, 0);
         });
+    }
+
+    private void loadSavedTrails() {
+        SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);
+        Set<String> savedTrails = prefs.getStringSet("saved_trails", new HashSet<>());
+
+        if (savedTrails.isEmpty()) {
+            return;
+        }
+
+        // Clear placeholder if items exist
+        savedContainer.removeAllViews();
+
+        for (String trail : savedTrails) {
+            String[] parts = trail.split("\\|");
+            if (parts.length >= 3) {
+                addSavedTrailView(parts[0], parts[1], parts[2]);
+            }
+        }
+    }
+
+    private void addSavedTrailView(String name, String sub, String stats) {
+        View card = LayoutInflater.from(this).inflate(R.layout.item_saved_trail, savedContainer, false);
+        
+        TextView txtName = card.findViewById(R.id.txtSavedName);
+        TextView txtSub = card.findViewById(R.id.txtSavedSub);
+        TextView txtStats = card.findViewById(R.id.txtSavedStats);
+
+        txtName.setText(name);
+        txtSub.setText(sub);
+        txtStats.setText(stats);
+
+        savedContainer.addView(card);
     }
 }
