@@ -48,7 +48,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your full name"
+            android:hint="Enter your Username"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textColor="#000000"

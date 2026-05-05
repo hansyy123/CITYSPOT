@@ -1,229 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#121212">
 
-    <!-- Header Text (Behind the card) -->
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="60dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See trail details"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="before going"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp" />
-    </LinearLayout>
+        android:layout_height="350dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@android:color/transparent">
 
-    <!-- Main Card Container -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="140dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="40dp"
-        app:cardCornerRadius="40dp"
-        app:cardBackgroundColor="#F0F4F0"
-        app:cardElevation="8dp">
-
-        <RelativeLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="12dp">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="#121212"
+            app:titleEnabled="false">
 
-            <!-- Phone Frame Lookalike (Inner Container) -->
-            <androidx.cardview.widget.CardView
+            <ImageView
+                android:id="@+id/imgDetailHeader"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="32dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardElevation="0dp">
+                android:scaleType="centerCrop"
+                android:src="@drawable/img"
+                app:layout_collapseMode="parallax" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <!-- Gradient Overlay for better text visibility -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="top"
+                android:background="@drawable/bg_search_modern"
+                android:alpha="0.4"
+                android:rotation="180"/>
 
-                    <!-- Trail Image and Top Overlay -->
-                    <FrameLayout
-                        android:id="@+id/imageContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="280dp">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/logo"
-                            android:background="#DDDDDD"
-                            android:contentDescription="Trail Image" />
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_search_bar"
+                    android:src="@android:drawable/ic_menu_revert"
+                    app:tint="#FFFFFF"
+                    android:padding="8dp" />
 
-                        <!-- Top Action Buttons -->
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="16dp">
+            </androidx.appcompat.widget.Toolbar>
 
-                            <ImageButton
-                                android:id="@+id/btnBack"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/btn_light_rounded"
-                                android:src="@android:drawable/ic_menu_revert"
-                                android:padding="8dp"
-                                android:contentDescription="Back" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:orientation="horizontal">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="-32dp">
 
-                                <ImageButton
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:background="@drawable/btn_light_rounded"
-                                    android:src="@android:drawable/ic_menu_share"
-                                    android:padding="8dp"
-                                    android:contentDescription="Share" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_detail_sheet"
+            android:padding="24dp"
+            android:elevation="4dp">
 
-                                <ImageButton
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:background="@drawable/btn_light_rounded"
-                                    android:src="@android:drawable/checkbox_on_background"
-                                    android:padding="8dp"
-                                    android:contentDescription="Favorite" />
+            <TextView
+                android:id="@+id/txtDetailTrailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Attraction Name"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black" />
 
-                                <ImageButton
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:background="@drawable/btn_light_rounded"
-                                    android:src="@android:drawable/ic_menu_save"
-                                    android:padding="8dp"
-                                    android:contentDescription="Save" />
-                            </LinearLayout>
-                        </RelativeLayout>
+            <TextView
+                android:id="@+id/txtDetailSubInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location Info"
+                android:textColor="#BBBBBB"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
 
-                        <!-- Play Button -->
-                        <ImageButton
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="bottom|end"
-                            android:layout_margin="16dp"
-                            android:background="@drawable/btn_light_rounded"
-                            android:src="@android:drawable/ic_media_play"
-                            android:padding="12dp"
-                            android:contentDescription="Play" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#222222"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp" />
 
-                        <!-- Pagination Dots -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="16dp"
-                            android:orientation="horizontal">
-                            <View android:layout_width="6dp" android:layout_height="6dp" android:background="#FFFFFF" android:layout_margin="3dp" />
-                            <View android:layout_width="6dp" android:layout_height="6dp" android:background="#88FFFFFF" android:layout_margin="3dp" />
-                            <View android:layout_width="6dp" android:layout_height="6dp" android:background="#88FFFFFF" android:layout_margin="3dp" />
-                            <View android:layout_width="6dp" android:layout_height="6dp" android:background="#88FFFFFF" android:layout_margin="3dp" />
-                        </LinearLayout>
-                    </FrameLayout>
+            <!-- Stats Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-                    <!-- Trail Info -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@id/imageContainer"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_dialog_map"
+                        app:tint="#4CAF50" />
+                    <TextView
+                        android:id="@+id/txtDetailElevation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6.9°"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Latitude"
+                        android:textColor="#888888"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/txtDetailTrailName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Castleton, Mam Tor,\nand The Great Ridge\nCircular"
-                            android:textColor="#000000"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:lineSpacingExtra="2dp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_dialog_map"
+                        app:tint="#2196F3" />
+                    <TextView
+                        android:id="@+id/txtDetailTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="122.1°"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Longitude"
+                        android:textColor="#888888"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginTop="8dp">
-                            <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@android:drawable/btn_star_big_on" android:contentDescription="Star" />
-                            <TextView android:id="@+id/txtDetailSubInfo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" 4.7 • Moderate • Peak District National Park" android:textColor="#666666" android:textSize="12sp" />
-                        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        app:tint="#FF9800" />
+                    <TextView
+                        android:id="@+id/txtDetailDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Info"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textColor="#888888"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#EEEEEE"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginBottom="16dp" />
+            </LinearLayout>
 
-                        <!-- Stats Grid -->
-                        <GridLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:rowCount="2">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About this Place"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp" />
 
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical" android:layout_marginBottom="16dp">
-                                <TextView android:id="@+id/txtDetailDistance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12.9 km" android:textColor="#000000" android:textStyle="bold" android:textSize="16sp" />
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Distance" android:textColor="#888888" android:textSize="12sp" />
-                            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Experience the cultural and natural wonders of Zamboanga City. This landmark offers a unique glimpse into the city's rich history and breathtaking landscapes, perfect for explorers and tourists."
+                android:textColor="#AAAAAA"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
 
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical">
-                                <TextView android:id="@+id/txtDetailElevation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="639 m" android:textColor="#000000" android:textStyle="bold" android:textSize="16sp" />
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Elevation gain" android:textColor="#888888" android:textSize="12sp" />
-                            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGetDirections"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/btn_dark_rounded"
+                android:text="Get Directions"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:elevation="4dp" />
 
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical">
-                                <TextView android:id="@+id/txtDetailTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4 hr" android:textColor="#000000" android:textStyle="bold" android:textSize="16sp" />
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Estimated time" android:textColor="#888888" android:textSize="12sp" />
-                            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
 
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical">
-                                <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@android:drawable/ic_menu_rotate" android:contentDescription="Type" />
-                                <TextView android:id="@+id/txtDetailType" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Circular" android:textColor="#888888" android:textSize="12sp" />
-                            </LinearLayout>
-                        </GridLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-                    </LinearLayout>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Close Button (X) at Top Right -->
-    <ImageButton
-        android:id="@+id/btnClose"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_search_bar"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:tint="#FFFFFF"
-        android:padding="10dp"
-        android:contentDescription="Close" />
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,20 +3,24 @@ package com.example.cityspot;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private Button btnLogout, btnEditProfile, btnSettings, btnSaved, btnProfile, btnMap, btnExplore;
+    private TextView txtUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        txtUsername = findViewById(R.id.txtUsername);
         btnLogout = findViewById(R.id.btnLogout);
         btnEditProfile = findViewById(R.id.editProfileButton);
         btnSettings = findViewById(R.id.settingsButton);
@@ -24,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
         btnProfile = findViewById(R.id.btnProfile);
         btnMap = findViewById(R.id.btnMap);
         btnExplore = findViewById(R.id.btnExplore);
+
+        updateProfileInfo();
 
         // Logout button
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +70,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        btnProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Already in ProfileActivity
-            }
-        });
-
         btnExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,4 +86,16 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void updateProfileInfo() {
+        SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);
+        String username = prefs.getString("username", "User");
+        txtUsername.setText(username);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateProfileInfo(); // Update info when returning from EditProfile
+    }
+}

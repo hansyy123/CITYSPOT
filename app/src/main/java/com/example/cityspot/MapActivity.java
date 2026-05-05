@@ -1,25 +1,49 @@
 package com.example.cityspot;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import org.osmdroid.bonuspack.routing.OSRMRoadManager;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+
+import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
 
+    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView mapView;
     private Button btnExplore, btnSaved, btnProfile, btnMap;
+    private MyLocationNewOverlay mLocationOverlay;
+    private Polyline roadOverlay;
+    private GeoPoint destinationPoint;
+    private String destinationName;
+    private Marker infoMarker;
+    private boolean routeRequested = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +52,8 @@ public class MapActivity extends AppCompatActivity {
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx,
                 androidx.preference.PreferenceManager.getDefaultSharedPreferences(ctx));
+        // Important for OSRM service
+        Configuration.getInstance().setUserAgentValue(getPackageName());
 
         setContentView(R.layout.activity_map);
 
@@ -35,65 +61,20 @@ public class MapActivity extends AppCompatActivity {
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
 
-        GeoPoint zamboanga = new GeoPoint(6.9214, 122.0790);
+        // Default center: Zamboanga City
+        GeoPoint startPoint = new GeoPoint(6.9214, 122.0790);
         mapView.getController().setZoom(14.0);
-        mapView.getController().setCenter(zamboanga);
+        mapView.getController().setCenter(startPoint);
 
-        addMarker(6.901364906320903, 122.0832222706528, "Fort Pilar",
-                "Pilar St, Zamboanga City",
-                "Historic Spanish-era fort and shrine dedicated to Our Lady of the Pillar");
+        requestPermissionsIfNecessary(new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        });
 
-        addMarker(6.8729579146675475, 122.05844877432924, "Santa Cruz Island",
-                "Great Santa Cruz Island, Zamboanga City",
-                "Famous pink sand beach and protected island destination");
+        setupLocationOverlay();
+        addDefaultMarkers();
 
-        addMarker(6.900773315389889, 122.08126672442509, "Paseo Del Mar",
-                "Paseo del Mar, Zamboanga City",
-                "Popular seaside park with sunset views, food stalls, and cultural shows");
-
-        addMarker(7.120713444659594, 122.27011291141665, "Once Islas",
-                "Barangay Panubigan, Zamboanga City",
-                "Group of scenic islands known for white sand beaches and clear waters");
-
-        addMarker(6.952673974078125, 122.07474407150936, "Pasonanca Park",
-                "Pasonanca, Zamboanga City",
-                "Cool mountain park with pools, tree houses, and picnic areas");
-
-        addMarker(7.3103435668858685, 122.21349478209761, "Merloquet Falls",
-                "Sibulao, Zamboanga City",
-                "Beautiful cascading waterfall surrounded by lush forest");
-
-        addMarker(6.965572885339477, 122.06122819559002, "Lantawan Grassland",
-                "Upper Pasonanca, Zamboanga City",
-                "Open grassland viewpoint offering scenic mountain views");
-
-        addMarker(6.964790335402858, 122.07612028024901, "Abong-Abong Park",
-                "Pasonanca, Zamboanga City",
-                "Hilltop pilgrimage site with stations of the cross and city views");
-
-        addMarker(6.925108906106171, 122.02221645908409, "Yakan Weaving Village",
-                "Upper Calarian, Zamboanga City",
-                "Cultural village showcasing traditional Yakan weaving and crafts");
-
-        addMarker(6.952771635760352, 122.18126096306126, "Taluksangay Mosque",
-                "Taluksangay, Zamboanga City",
-                "One of the oldest mosques in Western Mindanao with rich Islamic heritage");
-
-        addMarker(6.904346115853981, 122.07616608024884, "Zamboanga City Hall",
-                "Valderrosa St, Zamboanga City",
-                "Government building known for its classic colonial architecture");
-
-        addMarker(6.920335553163613, 122.07343661334465, "KCC Mall de Zamboanga",
-                "Gov. Camins Ave, Zamboanga City",
-                "Large shopping mall with dining, shopping, and entertainment options");
-
-        addMarker(6.908587597462885, 122.07592563907839, "SM Mindpro",
-                "La Purisima St, Zamboanga City",
-                "Modern shopping mall with retail stores, cinema, and restaurants");
-
-        addMarker(6.902609454881635, 122.08459486675447, "Zamboanga City Bird Sanctuary",
-                "Pasonanca, Zamboanga City",
-                "Protected area for birds and wildlife ideal for nature lovers");
+        handleIntent(getIntent());
 
         // Bottom Navigation Setup
         btnExplore = findViewById(R.id.btnExplore);
@@ -117,6 +98,150 @@ public class MapActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void setupLocationOverlay() {
+        mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
+        mLocationOverlay.enableMyLocation();
+        mLocationOverlay.enableFollowLocation();
+        
+        mLocationOverlay.runOnFirstFix(() -> {
+            if (destinationPoint != null && !routeRequested) {
+                runOnUiThread(() -> {
+                    Toast.makeText(MapActivity.this, "GPS Fix obtained. Calculating route...", Toast.LENGTH_SHORT).show();
+                    calculateAndDrawRoute();
+                });
+            }
+        });
+        
+        mapView.getOverlays().add(mLocationOverlay);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (intent != null && intent.hasExtra("dest_lat") && intent.hasExtra("dest_lon")) {
+            double destLat = intent.getDoubleExtra("dest_lat", 0.0);
+            double destLon = intent.getDoubleExtra("dest_lon", 0.0);
+            destinationName = intent.getStringExtra("dest_name");
+            destinationPoint = new GeoPoint(destLat, destLon);
+            routeRequested = false;
+
+            mapView.getController().setZoom(15.0);
+            mapView.getController().animateTo(destinationPoint);
+
+            addMarker(destLat, destLon, destinationName, "Destination", "Target location");
+            
+            GeoPoint myLoc = mLocationOverlay.getMyLocation();
+            if (myLoc != null) {
+                calculateAndDrawRoute();
+            } else {
+                Toast.makeText(this, "Waiting for GPS location...", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void calculateAndDrawRoute() {
+        GeoPoint myLocation = mLocationOverlay.getMyLocation();
+        if (myLocation == null || destinationPoint == null) return;
+
+        routeRequested = true;
+
+        if (roadOverlay != null) {
+            mapView.getOverlays().remove(roadOverlay);
+        }
+        if (infoMarker != null) {
+            mapView.getOverlays().remove(infoMarker);
+        }
+
+        new UpdateRoadTask().execute(myLocation, destinationPoint);
+    }
+
+    private class UpdateRoadTask extends AsyncTask<GeoPoint, Void, Road> {
+        @Override
+        protected Road doInBackground(GeoPoint... params) {
+            try {
+                RoadManager roadManager = new OSRMRoadManager(MapActivity.this, Configuration.getInstance().getUserAgentValue());
+                ArrayList<GeoPoint> waypoints = new ArrayList<>();
+                waypoints.add(params[0]);
+                waypoints.add(params[1]);
+                return roadManager.getRoad(waypoints);
+            } catch (Exception e) {
+                Log.e("MapActivity", "Routing error", e);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Road road) {
+            if (road != null && road.mStatus == Road.STATUS_OK) {
+                roadOverlay = RoadManager.buildRoadOverlay(road);
+                roadOverlay.setColor(Color.BLUE);
+                roadOverlay.setWidth(15.0f); // Slightly thicker
+                mapView.getOverlays().add(roadOverlay);
+                
+                // Add info marker at the midpoint
+                if (road.mRouteHigh.size() > 0) {
+                    infoMarker = new Marker(mapView);
+                    GeoPoint midpoint = road.mRouteHigh.get(road.mRouteHigh.size() / 2);
+                    infoMarker.setPosition(midpoint);
+                    infoMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                    
+                    String info = String.format("%.1f km, %.0f min", 
+                            road.mLength, road.mDuration/60.0);
+                    infoMarker.setTitle(info);
+                    infoMarker.showInfoWindow();
+                    mapView.getOverlays().add(infoMarker);
+                }
+                
+                mapView.invalidate();
+                
+                // Zoom out to show both
+                ArrayList<GeoPoint> points = new ArrayList<>();
+                points.add(mLocationOverlay.getMyLocation());
+                points.add(destinationPoint);
+                zoomToFitPoints(points);
+
+            } else {
+                String error = (road == null) ? "Network error" : "Route status: " + road.mStatus;
+                Toast.makeText(MapActivity.this, "Could not find route: " + error, Toast.LENGTH_SHORT).show();
+                routeRequested = false; // Allow retry
+            }
+        }
+    }
+
+    private void zoomToFitPoints(ArrayList<GeoPoint> points) {
+        if (points.size() < 2) return;
+        double minLat = Double.MAX_VALUE, maxLat = -Double.MAX_VALUE;
+        double minLon = Double.MAX_VALUE, maxLon = -Double.MAX_VALUE;
+
+        for (GeoPoint p : points) {
+            if (p == null) continue;
+            minLat = Math.min(minLat, p.getLatitude());
+            maxLat = Math.max(maxLat, p.getLatitude());
+            minLon = Math.min(minLon, p.getLongitude());
+            maxLon = Math.max(maxLon, p.getLongitude());
+        }
+
+        try {
+            BoundingBox bb = new BoundingBox(maxLat + 0.005, maxLon + 0.005, minLat - 0.005, minLon - 0.005);
+            mapView.zoomToBoundingBox(bb, true);
+        } catch (Exception e) {
+            // Fallback if bounding box fails
+        }
+    }
+
+    private void addDefaultMarkers() {
+        addMarker(6.901364906320903, 122.0832222706528, "Fort Pilar", "Historic Spanish-era fort", "");
+        addMarker(6.8729579146675475, 122.05844877432924, "Santa Cruz Island", "Famous pink sand beach", "");
+        addMarker(6.900773315389889, 122.08126672442509, "Paseo Del Mar", "Popular seaside park", "");
+        addMarker(6.925108906106171, 122.02221645908409, "Yakan Weaving Village", "Traditional crafts", "");
+        addMarker(6.952673974078125, 122.07474407150936, "Pasonanca Park", "Cool mountain park", "");
+    }
+
     private void addMarker(double lat, double lon, String title, String snippet, String description) {
         Marker marker = new Marker(mapView);
         marker.setPosition(new GeoPoint(lat, lon));
@@ -124,26 +249,50 @@ public class MapActivity extends AppCompatActivity {
         marker.setSnippet(snippet);
         marker.setSubDescription(description);
 
-        // Change marker color to red
-        Drawable icon = marker.getIcon();
+        Drawable icon = ContextCompat.getDrawable(this, org.osmdroid.library.R.drawable.marker_default);
         if (icon != null) {
             icon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             marker.setIcon(icon);
         }
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-
         mapView.getOverlays().add(marker);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (mLocationOverlay != null) {
+                mLocationOverlay.enableMyLocation();
+                mLocationOverlay.enableFollowLocation();
+            }
+        }
+    }
+
+    private void requestPermissionsIfNecessary(String[] permissions) {
+        ArrayList<String> permissionsToRequest = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(permission);
+            }
+        }
+        if (permissionsToRequest.size() > 0) {
+            ActivityCompat.requestPermissions(this, permissionsToRequest.toArray(new String[0]), REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mapView.onResume();
+        if (mLocationOverlay != null) mLocationOverlay.enableMyLocation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mapView.onPause();
+        if (mLocationOverlay != null) mLocationOverlay.disableMyLocation();
     }
 }

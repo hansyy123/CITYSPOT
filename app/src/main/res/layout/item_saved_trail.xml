@@ -4,43 +4,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="16dp"
     app:cardBackgroundColor="#1E1E1E"
     android:layout_marginBottom="16dp"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/txtSavedName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trail Name"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        <!-- Small placeholder for image or icon -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#2A2A2A">
+            <ImageView
+                android:id="@+id/imgSavedThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img" />
+        </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/txtSavedSub"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sub Info"
-            android:textColor="#CCCCCC"
-            android:textSize="12sp"
-            android:layout_marginTop="4dp" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
 
-        <TextView
-            android:id="@+id/txtSavedStats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stats"
-            android:textColor="#888888"
-            android:textSize="12sp"
-            android:layout_marginTop="4dp" />
+            <TextView
+                android:id="@+id/txtSavedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trail Name"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/txtSavedSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location Info"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/txtSavedStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:textColor="#4CAF50"
+                android:textSize="11sp"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/ic_media_play"
+            android:rotation="0"
+            app:tint="#333333" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

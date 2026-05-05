@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ExploreActivity extends AppCompatActivity {
@@ -20,7 +24,8 @@ public class ExploreActivity extends AppCompatActivity {
     private Button btnExplore, btnSaved, btnProfile, btnMap;
     private TextView txtExploreTitle;
     private EditText editSearch;
-    private View card1, card2, card3;
+    private LinearLayout exploreContainer;
+    private List<Attraction> attractionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,40 +38,70 @@ public class ExploreActivity extends AppCompatActivity {
         btnMap = findViewById(R.id.btnMap);
         txtExploreTitle = findViewById(R.id.exploreTitle);
         editSearch = findViewById(R.id.editSearch);
-        
-        card1 = findViewById(R.id.cardTrail1);
-        card2 = findViewById(R.id.cardTrail2);
-        card3 = findViewById(R.id.cardTrail3);
+        exploreContainer = findViewById(R.id.exploreContainer);
 
-        setupTrailClicks();
-        setupSaveButtons();
+        initData();
+        displayAttractions(attractionList);
         setupSearch();
-
         updateWelcomeMessage();
 
-        btnSaved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ExploreActivity.this, SavedActivity.class));
-                overridePendingTransition(0, 0);
-            }
+        btnSaved.setOnClickListener(v -> {
+            startActivity(new Intent(ExploreActivity.this, SavedActivity.class));
+            overridePendingTransition(0, 0);
         });
 
-        btnProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ExploreActivity.this, ProfileActivity.class));
-                overridePendingTransition(0, 0);
-            }
+        btnProfile.setOnClickListener(v -> {
+            startActivity(new Intent(ExploreActivity.this, ProfileActivity.class));
+            overridePendingTransition(0, 0);
         });
 
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ExploreActivity.this, MapActivity.class));
-                overridePendingTransition(0, 0);
-            }
+        btnMap.setOnClickListener(v -> {
+            startActivity(new Intent(ExploreActivity.this, MapActivity.class));
+            overridePendingTransition(0, 0);
         });
+    }
+
+    private void initData() {
+        attractionList = new ArrayList<>();
+        attractionList.add(new Attraction("Santa cruz island", "Great Santa Cruz Island, Zamboanga City", "Famous pink sand beach", R.drawable.img, 6.8729579146675475, 122.05844877432924));
+        attractionList.add(new Attraction("Paseo Del Mar", "Paseo del Mar, Zamboanga City", "Seaside park with sunset views", R.drawable.img_1, 6.900773315389889, 122.08126672442509));
+        attractionList.add(new Attraction("Once isla", "Barangay Panubigan, Zamboanga City", "Eco-cultural tourism site", R.drawable.img, 7.120713444659594, 122.27011291141665));
+        attractionList.add(new Attraction("Merloquet falls", "Sibulao, Zamboanga City", "Two-tier scenic waterfall", R.drawable.img_1, 7.3103435668858685, 122.21349478209761));
+        attractionList.add(new Attraction("Lantawan grassland", "Upper Pasonanca, Zamboanga City", "Scenic mountain viewpoint", R.drawable.img, 6.965572885339477, 122.06122819559002));
+        attractionList.add(new Attraction("Yakan Weaving Village", "Upper Calarian, Zamboanga City", "Traditional Yakan crafts", R.drawable.img_1, 6.925108906106171, 122.02221645908409));
+        attractionList.add(new Attraction("Zamboanga City Hall", "Valderrosa St, Zamboanga City", "Classic colonial architecture", R.drawable.city_hall_zamboanga, 6.904346115853981, 122.07616608024884));
+        attractionList.add(new Attraction("R. T. Lim Boulevard (Viewing Deck)", "R. T. Lim Blvd, Zamboanga City", "Breathtaking coastal views", R.drawable.peoples_park_zamboanga, 6.907358369240467, 122.06851645586336));
+        attractionList.add(new Attraction("National Museum Fort Pilar, Zamboanga City", "Pilar St, Zamboanga City", "Historic Spanish-era fort", R.drawable.fort_pilar, 6.901007470878223, 122.08141738469901));
+        attractionList.add(new Attraction("Dulian Falls", "Dulian, Zamboanga City", "Lush forest waterfall", R.drawable.img, 7.151025145289209, 122.17878779202081));
+    }
+
+    private void displayAttractions(List<Attraction> list) {
+        if (exploreContainer == null) return;
+        exploreContainer.removeAllViews();
+        for (Attraction attraction : list) {
+            View card = getLayoutInflater().inflate(R.layout.item_attraction_card, exploreContainer, false);
+            
+            ImageView img = card.findViewById(R.id.imgAttraction);
+            TextView name = card.findViewById(R.id.txtAttractionName);
+            TextView loc = card.findViewById(R.id.txtLocation);
+            ImageButton fav = card.findViewById(R.id.btnFavorite);
+            
+            img.setImageResource(attraction.getImageResId());
+            name.setText(attraction.getName());
+            loc.setText(attraction.getLocation());
+            
+            card.setOnClickListener(v -> openDetail(attraction));
+            fav.setOnClickListener(v -> {
+                String trailData = attraction.getName() + "|" + 
+                                  attraction.getLocation() + "|" + 
+                                  attraction.getDetails() + "|" + 
+                                  attraction.getLat() + "|" + 
+                                  attraction.getLon();
+                saveTrail(trailData);
+            });
+            
+            exploreContainer.addView(card);
+        }
     }
 
     private void setupSearch() {
@@ -76,7 +111,7 @@ public class ExploreActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterTrails(s.toString().toLowerCase());
+                filterAttractions(s.toString());
             }
 
             @Override
@@ -84,33 +119,31 @@ public class ExploreActivity extends AppCompatActivity {
         });
     }
 
-    private void filterTrails(String query) {
-        // Names of the trails to check against
-        String name1 = "Castleton, Mam Tor, and Great Ridge".toLowerCase();
-        String name2 = "Mount Pulunbato Loop".toLowerCase();
-        String name3 = "Sibugay Peak Trail".toLowerCase();
-
-        // Show/Hide based on match
-        card1.setVisibility(name1.contains(query) ? View.VISIBLE : View.GONE);
-        card2.setVisibility(name2.contains(query) ? View.VISIBLE : View.GONE);
-        card3.setVisibility(name3.contains(query) ? View.VISIBLE : View.GONE);
+    private void filterAttractions(String query) {
+        List<Attraction> filtered = new ArrayList<>();
+        String lowerQuery = query.toLowerCase();
+        for (Attraction a : attractionList) {
+            if (a.getName().toLowerCase().contains(lowerQuery) || 
+                a.getLocation().toLowerCase().contains(lowerQuery)) {
+                filtered.add(a);
+            }
+        }
+        displayAttractions(filtered);
     }
 
-    private void setupSaveButtons() {
-        ImageButton save1 = findViewById(R.id.btnSaveTrail1);
-        ImageButton save2 = findViewById(R.id.btnSaveTrail2);
-        ImageButton save3 = findViewById(R.id.btnSaveTrail3);
-
-        save1.setOnClickListener(v -> saveTrail("Castleton, Mam Tor, and Great Ridge|4.7 • Moderate • Peak District National Park|12.9 km • 639 m • 4 hr"));
-        save2.setOnClickListener(v -> saveTrail("Mount Pulunbato Loop|3.7 • Moderate • Zamboanga City|18 km • 450 m • 4h 17m"));
-        save3.setOnClickListener(v -> saveTrail("Sibugay Peak Trail|4.2 • Hard • Ipil, Zamboanga Sibugay|8.5 km • 720 m • 5 hr"));
+    private void openDetail(Attraction attraction) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("trail_name", attraction.getName());
+        intent.putExtra("trail_sub_info", attraction.getLocation());
+        intent.putExtra("trail_distance", attraction.getDetails());
+        intent.putExtra("trail_lat", attraction.getLat());
+        intent.putExtra("trail_lon", attraction.getLon());
+        startActivity(intent);
     }
 
     private void saveTrail(String trailData) {
         SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);
         Set<String> savedTrails = prefs.getStringSet("saved_trails", new HashSet<>());
-        
-        // Use a copy because the returned set shouldn't be modified
         Set<String> newSavedTrails = new HashSet<>(savedTrails);
         if (newSavedTrails.add(trailData)) {
             prefs.edit().putStringSet("saved_trails", newSavedTrails).apply();
@@ -118,35 +151,6 @@ public class ExploreActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Already in favorites!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void setupTrailClicks() {
-        // Trail 1
-        View.OnClickListener click1 = v -> openDetail(
-                "Castleton, Mam Tor, and Great Ridge",
-                "4.7 • Moderate • Peak District National Park",
-                "12.9 km", "639 m", "4 hr"
-        );
-        findViewById(R.id.cardTrail1).setOnClickListener(click1);
-        findViewById(R.id.imgContainer1).setOnClickListener(click1);
-
-        // Trail 2
-        View.OnClickListener click2 = v -> openDetail(
-                "Mount Pulunbato Loop",
-                "3.7 • Moderate • Zamboanga City",
-                "18 km", "450 m", "4h 17m"
-        );
-        findViewById(R.id.cardTrail2).setOnClickListener(click2);
-        findViewById(R.id.imgContainer2).setOnClickListener(click2);
-
-        // Trail 3
-        View.OnClickListener click3 = v -> openDetail(
-                "Sibugay Peak Trail",
-                "4.2 • Hard • Ipil, Zamboanga Sibugay",
-                "8.5 km", "720 m", "5 hr"
-        );
-        findViewById(R.id.cardTrail3).setOnClickListener(click3);
-        findViewById(R.id.imgContainer3).setOnClickListener(click3);
     }
 
     private void updateWelcomeMessage() {
@@ -158,17 +162,6 @@ public class ExploreActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Update the welcome message in case the username was changed in EditProfileActivity
         updateWelcomeMessage();
-    }
-
-    private void openDetail(String name, String sub, String dist, String elev, String time) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("trail_name", name);
-        intent.putExtra("trail_sub_info", sub);
-        intent.putExtra("trail_distance", dist);
-        intent.putExtra("trail_elevation", elev);
-        intent.putExtra("trail_time", time);
-        startActivity(intent);
     }
 }

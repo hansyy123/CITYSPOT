@@ -54,18 +54,23 @@ public class SavedActivity extends AppCompatActivity {
             return;
         }
 
-        // Clear placeholder if items exist
         savedContainer.removeAllViews();
 
         for (String trail : savedTrails) {
             String[] parts = trail.split("\\|");
             if (parts.length >= 3) {
-                addSavedTrailView(parts[0], parts[1], parts[2]);
+                String name = parts[0];
+                String sub = parts[1];
+                String stats = parts[2];
+                String lat = parts.length > 3 ? parts[3] : "0.0";
+                String lon = parts.length > 4 ? parts[4] : "0.0";
+                
+                addSavedTrailView(name, sub, stats, lat, lon);
             }
         }
     }
 
-    private void addSavedTrailView(String name, String sub, String stats) {
+    private void addSavedTrailView(String name, String sub, String stats, String lat, String lon) {
         View card = LayoutInflater.from(this).inflate(R.layout.item_saved_trail, savedContainer, false);
         
         TextView txtName = card.findViewById(R.id.txtSavedName);
@@ -75,6 +80,17 @@ public class SavedActivity extends AppCompatActivity {
         txtName.setText(name);
         txtSub.setText(sub);
         txtStats.setText(stats);
+
+        // Click to open DetailActivity
+        card.setOnClickListener(v -> {
+            Intent intent = new Intent(SavedActivity.this, DetailActivity.class);
+            intent.putExtra("trail_name", name);
+            intent.putExtra("trail_sub_info", sub);
+            intent.putExtra("trail_distance", stats);
+            intent.putExtra("trail_elevation", lat);
+            intent.putExtra("trail_time", lon);
+            startActivity(intent);
+        });
 
         savedContainer.addView(card);
     }
