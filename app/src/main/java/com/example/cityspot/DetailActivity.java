@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,11 +21,13 @@ public class DetailActivity extends AppCompatActivity {
         TextView txtDistance = findViewById(R.id.txtDetailDistance);
         TextView txtElevation = findViewById(R.id.txtDetailElevation);
         TextView txtTime = findViewById(R.id.txtDetailTime);
+        ImageView imgHeader = findViewById(R.id.imgDetailHeader);
 
         // Get data from intent
         String name = getIntent().getStringExtra("trail_name");
         String subInfo = getIntent().getStringExtra("trail_sub_info");
         String distance = getIntent().getStringExtra("trail_distance");
+        int imageResId = getIntent().getIntExtra("trail_image", R.drawable.img);
         
         // These are passed as doubles from ExploreActivity now
         double lat = getIntent().getDoubleExtra("trail_lat", 0.0);
@@ -33,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         if (name != null) txtName.setText(name);
         if (subInfo != null) txtSubInfo.setText(subInfo);
         if (distance != null) txtDistance.setText(distance);
+        imgHeader.setImageResource(imageResId);
         
         // Display coordinates in the stats row for reference
         txtElevation.setText(String.format("%.4f", lat));

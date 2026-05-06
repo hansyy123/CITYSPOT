@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CitySpot</string>
+    <string name="attraction_name_placeholder">Attraction Name</string>
+    <string name="location_info_placeholder">Location Info</string>
+    <string name="details_placeholder">Details</string>
+    <string name="favorite_content_description">Favorite</string>
+    <string name="attraction_image_description">Attraction Image</string>
 </resources>

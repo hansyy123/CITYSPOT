@@ -71,11 +71,15 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@android:drawable/ic_media_play"
-            android:rotation="0"
-            app:tint="#333333" />
+            android:id="@+id/btnDeleteSaved"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:padding="4dp"
+            app:tint="#FF5252"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

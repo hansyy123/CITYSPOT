@@ -63,16 +63,16 @@ public class ExploreActivity extends AppCompatActivity {
 
     private void initData() {
         attractionList = new ArrayList<>();
-        attractionList.add(new Attraction("Santa cruz island", "Great Santa Cruz Island, Zamboanga City", "Famous pink sand beach", R.drawable.img, 6.8729579146675475, 122.05844877432924));
-        attractionList.add(new Attraction("Paseo Del Mar", "Paseo del Mar, Zamboanga City", "Seaside park with sunset views", R.drawable.img_1, 6.900773315389889, 122.08126672442509));
-        attractionList.add(new Attraction("Once isla", "Barangay Panubigan, Zamboanga City", "Eco-cultural tourism site", R.drawable.img, 7.120713444659594, 122.27011291141665));
-        attractionList.add(new Attraction("Merloquet falls", "Sibulao, Zamboanga City", "Two-tier scenic waterfall", R.drawable.img_1, 7.3103435668858685, 122.21349478209761));
-        attractionList.add(new Attraction("Lantawan grassland", "Upper Pasonanca, Zamboanga City", "Scenic mountain viewpoint", R.drawable.img, 6.965572885339477, 122.06122819559002));
-        attractionList.add(new Attraction("Yakan Weaving Village", "Upper Calarian, Zamboanga City", "Traditional Yakan crafts", R.drawable.img_1, 6.925108906106171, 122.02221645908409));
-        attractionList.add(new Attraction("Zamboanga City Hall", "Valderrosa St, Zamboanga City", "Classic colonial architecture", R.drawable.city_hall_zamboanga, 6.904346115853981, 122.07616608024884));
-        attractionList.add(new Attraction("R. T. Lim Boulevard (Viewing Deck)", "R. T. Lim Blvd, Zamboanga City", "Breathtaking coastal views", R.drawable.peoples_park_zamboanga, 6.907358369240467, 122.06851645586336));
-        attractionList.add(new Attraction("National Museum Fort Pilar, Zamboanga City", "Pilar St, Zamboanga City", "Historic Spanish-era fort", R.drawable.fort_pilar, 6.901007470878223, 122.08141738469901));
-        attractionList.add(new Attraction("Dulian Falls", "Dulian, Zamboanga City", "Lush forest waterfall", R.drawable.img, 7.151025145289209, 122.17878779202081));
+        attractionList.add(new Attraction("Santa cruz island", "Great Santa Cruz Island, Zamboanga City", "Famous pink sand beach", R.drawable.stacruz, 6.8729579146675475, 122.05844877432924));
+        attractionList.add(new Attraction("Paseo Del Mar", "Paseo del Mar, Zamboanga City", "Seaside park with sunset views", R.drawable.paseo, 6.900773315389889, 122.08126672442509));
+        attractionList.add(new Attraction("Once isla", "Barangay Panubigan, Zamboanga City", "Eco-cultural tourism site", R.drawable.onceislas, 7.120713444659594, 122.27011291141665));
+        attractionList.add(new Attraction("Merloquet falls", "Sibulao, Zamboanga City", "Two-tier scenic waterfall", R.drawable.merloquetfalls, 7.3103435668858685, 122.21349478209761));
+        attractionList.add(new Attraction("Lantawan grassland", "Upper Pasonanca, Zamboanga City", "Scenic mountain viewpoint", R.drawable.lantawan, 6.965572885339477, 122.06122819559002));
+        attractionList.add(new Attraction("Yakan Weaving Village", "Upper Calarian, Zamboanga City", "Traditional Yakan crafts", R.drawable.yakanvillage, 6.925108906106171, 122.02221645908409));
+        attractionList.add(new Attraction("Zamboanga City Hall", "Valderrosa St, Zamboanga City", "Classic colonial architecture", R.drawable.cityhall, 6.904346115853981, 122.07616608024884));
+        attractionList.add(new Attraction("R. T. Lim Boulevard (Viewing Deck)", "R. T. Lim Blvd, Zamboanga City", "Breathtaking coastal views", R.drawable.boulevard, 6.907358369240467, 122.06851645586336));
+        attractionList.add(new Attraction("National Museum Fort Pilar, Zamboanga City", "Pilar St, Zamboanga City", "Historic Spanish-era fort", R.drawable.museum, 6.901007470878223, 122.08141738469901));
+        attractionList.add(new Attraction("Dulian Falls", "Dulian, Zamboanga City", "Lush forest waterfall", R.drawable.dulianfalls, 7.151025145289209, 122.17878779202081));
     }
 
     private void displayAttractions(List<Attraction> list) {
@@ -96,7 +96,8 @@ public class ExploreActivity extends AppCompatActivity {
                                   attraction.getLocation() + "|" + 
                                   attraction.getDetails() + "|" + 
                                   attraction.getLat() + "|" + 
-                                  attraction.getLon();
+                                  attraction.getLon() + "|" +
+                                  attraction.getImageResId();
                 saveTrail(trailData);
             });
             
@@ -132,12 +133,18 @@ public class ExploreActivity extends AppCompatActivity {
     }
 
     private void openDetail(Attraction attraction) {
+        // Increment Visited Count
+        SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);
+        int visitedCount = prefs.getInt("visited_count", 0);
+        prefs.edit().putInt("visited_count", visitedCount + 1).apply();
+
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("trail_name", attraction.getName());
         intent.putExtra("trail_sub_info", attraction.getLocation());
         intent.putExtra("trail_distance", attraction.getDetails());
         intent.putExtra("trail_lat", attraction.getLat());
         intent.putExtra("trail_lon", attraction.getLon());
+        intent.putExtra("trail_image", attraction.getImageResId());
         startActivity(intent);
     }
 

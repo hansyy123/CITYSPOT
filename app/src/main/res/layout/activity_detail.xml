@@ -26,17 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img"
+                android:src="@drawable/cityhall"
                 app:layout_collapseMode="parallax" />
-
-            <!-- Gradient Overlay for better text visibility -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="top"
-                android:background="@drawable/bg_search_modern"
-                android:alpha="0.4"
-                android:rotation="180"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

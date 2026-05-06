@@ -48,9 +48,6 @@
         <!-- Detail Activity -->
         <activity android:name=".DetailActivity" />
 
-        <!-- About Activity -->
-        <activity android:name=".AboutActivity" />
-
         <activity android:name=".EditProfileActivity" android:exported="false" />
 
         <activity android:name=".SettingsActivity" android:exported="false" />

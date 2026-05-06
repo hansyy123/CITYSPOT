@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class ProfileActivity extends AppCompatActivity {
 
     private Button btnLogout, btnEditProfile, btnSettings, btnSaved, btnProfile, btnMap, btnExplore;
-    private TextView txtUsername;
+    private TextView txtUsername, txtSavedCount, txtVisitedCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         txtUsername = findViewById(R.id.txtUsername);
+        txtSavedCount = findViewById(R.id.txtSavedCount);
+        txtVisitedCount = findViewById(R.id.txtVisitedCount);
         btnLogout = findViewById(R.id.btnLogout);
         btnEditProfile = findViewById(R.id.editProfileButton);
         btnSettings = findViewById(R.id.settingsButton);
@@ -91,6 +93,14 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);
         String username = prefs.getString("username", "User");
         txtUsername.setText(username);
+
+        // Update Saved Count
+        java.util.Set<String> savedTrails = prefs.getStringSet("saved_trails", new java.util.HashSet<>());
+        txtSavedCount.setText(String.valueOf(savedTrails.size()));
+
+        // Update Visited Count
+        int visitedCount = prefs.getInt("visited_count", 0);
+        txtVisitedCount.setText(String.valueOf(visitedCount));
     }
 
     @Override

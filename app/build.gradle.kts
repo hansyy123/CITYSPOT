@@ -39,7 +39,11 @@ dependencies {
     implementation(libs.osmdroid)
     implementation(libs.preference)
     implementation(libs.osmbonuspack)
+    implementation("androidx.preference:preference:1.2.1")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }
