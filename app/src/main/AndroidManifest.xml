@@ -49,8 +49,8 @@
         <activity android:name=".DetailActivity" />
 
         <activity android:name=".EditProfileActivity" android:exported="false" />
+        <activity android:name=".AboutUsActivity" android:exported="false" />
 
-        <activity android:name=".SettingsActivity" android:exported="false" />
 
     </application>
 

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button btnLogout, btnEditProfile, btnSettings, btnSaved, btnProfile, btnMap, btnExplore;
+    private Button btnLogout, btnEditProfile, btnAboutUs, btnSaved, btnProfile, btnMap, btnExplore;
     private TextView txtUsername, txtSavedCount, txtVisitedCount;
 
     @Override
@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
         txtVisitedCount = findViewById(R.id.txtVisitedCount);
         btnLogout = findViewById(R.id.btnLogout);
         btnEditProfile = findViewById(R.id.editProfileButton);
-        btnSettings = findViewById(R.id.settingsButton);
+        btnAboutUs = findViewById(R.id.aboutUsButton);
         btnSaved = findViewById(R.id.btnSaved);
         btnProfile = findViewById(R.id.btnProfile);
         btnMap = findViewById(R.id.btnMap);
@@ -55,11 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Navigate to Settings
-        btnSettings.setOnClickListener(new View.OnClickListener() {
+        // Navigate to About Us
+        btnAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, AboutUsActivity.class);
                 startActivity(intent);
             }
         });

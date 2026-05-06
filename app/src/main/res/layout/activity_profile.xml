@@ -132,46 +132,46 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:padding="8dp">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/editProfileButton"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="64dp"
+                        android:layout_weight="1"
                         android:text="Edit Profile"
                         android:textColor="#FFFFFF"
-                        android:gravity="start|center_vertical"
+                        android:gravity="center"
                         app:icon="@android:drawable/ic_menu_edit"
                         app:iconTint="#FFFFFF"
                         app:iconSize="24dp"
-                        app:iconPadding="16dp"
-                        android:paddingStart="16dp"
+                        app:iconGravity="top"
                         android:textAllCaps="false"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#2A2A2A"
-                        android:layout_marginHorizontal="16dp" />
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#2A2A2A" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/settingsButton"
+                        android:id="@+id/aboutUsButton"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="64dp"
-                        android:text="Settings"
+                        android:layout_weight="1"
+                        android:text="About Us"
                         android:textColor="#FFFFFF"
-                        android:gravity="start|center_vertical"
-                        app:icon="@android:drawable/ic_menu_preferences"
+                        android:gravity="center"
+                        app:icon="@android:drawable/ic_menu_info_details"
                         app:iconTint="#FFFFFF"
                         app:iconSize="24dp"
-                        app:iconPadding="16dp"
-                        android:paddingStart="16dp"
+                        app:iconGravity="top"
                         android:textAllCaps="false"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -201,7 +201,8 @@
         android:layout_gravity="bottom"
         app:cardBackgroundColor="#1E1E1E"
         app:cardCornerRadius="0dp"
-        app:cardElevation="16dp">
+        app:strokeWidth="0dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:id="@+id/bottomNav"

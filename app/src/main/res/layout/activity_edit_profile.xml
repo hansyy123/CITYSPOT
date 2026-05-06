@@ -1,102 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#43523D"
-    android:padding="24dp">
+    android:background="#121212">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="#1E1E1E">
 
-        <!-- Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:layout_marginTop="48dp"
-            android:layout_gravity="center"/>
-
-        <!-- Subtitle -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update your account information"
-            android:textColor="#CCCCCC"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center"/>
-
-        <!-- Username label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="32dp"/>
-
-        <!-- Username EditText -->
-        <EditText
-            android:id="@+id/editUsername"
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your username"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:inputType="textPersonName"/>
+            android:layout_height="?attr/actionBarSize"
+            app:title="Edit Profile"
+            app:titleTextColor="#FFFFFF">
 
-        <!-- Password label -->
-        <TextView
-            android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/btnBackEdit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="#FFFFFF" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"/>
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <!-- Password EditText -->
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your new password"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:inputType="textPassword"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginTop="32dp"/>
 
-        <!-- Save Button -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Save Changes"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_dark_rounded"
-            android:layout_marginTop="32dp"/>
+            <EditText
+                android:id="@+id/editUsername"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/btn_light_rounded"
+                android:hint="New Username"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#000000"
+                android:inputType="textPersonName"/>
 
-        <!-- Cancel Button -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCancel"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Cancel"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_dark_rounded"
-            android:layout_marginTop="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"/>
 
-    </LinearLayout>
-</ScrollView>
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/btn_light_rounded"
+                android:hint="New Password"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#000000"
+                android:inputType="textPassword"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="48dp"
+                android:text="Save Changes"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="#E53935"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

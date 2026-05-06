@@ -1,125 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#43523D"
-    android:padding="24dp">
+    android:background="#121212">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/txtRegisterTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create Account"
-            android:textColor="#FFFFFF"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:layout_marginTop="48dp"
-            android:layout_gravity="center"/>
-
-        <!-- Subtitle -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Join the CitySpot community"
-            android:textColor="#CCCCCC"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center"/>
-
-        <!-- Name label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="32dp"/>
-
-        <EditText
-            android:id="@+id/editRegName"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your Username"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:inputType="textPersonName"/>
-
-        <!-- Email label -->
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"/>
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/editRegEmail"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_light_rounded"
-            android:hint="Enter your email"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:inputType="textEmailAddress"/>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="40dp"
+                app:cardCornerRadius="24dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardElevation="8dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo"
+                    android:padding="20dp"
+                    android:scaleType="centerInside" />
+            </com.google.android.material.card.MaterialCardView>
 
-        <!-- Password label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"/>
+            <TextView
+                android:id="@+id/txtRegisterTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp"/>
 
-        <EditText
-            android:id="@+id/editRegPassword"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_light_rounded"
-            android:hint="Create a password"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:inputType="textPassword"/>
+            <TextView
+                android:id="@+id/txtRegisterSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Join the CitySpot community"
+                android:textColor="#888888"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"/>
 
-        <!-- Register Button -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnRegisterSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Sign Up"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_dark_rounded"
-            android:layout_marginTop="32dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp">
 
-        <!-- Back to Login -->
-        <TextView
-            android:id="@+id/txtBackToLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Already have an account? Login"
-            android:textColor="#CCCCCC"
-            android:textSize="14sp"
-            android:layout_marginTop="24dp"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full Name"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"/>
 
-    </LinearLayout>
-</ScrollView>
+                <EditText
+                    android:id="@+id/editFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/btn_light_rounded"
+                    android:hint="Enter your full name"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#000000"
+                    android:inputType="textPersonName"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/editUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/btn_light_rounded"
+                    android:hint="Choose a username"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#000000"
+                    android:inputType="textPersonName"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/btn_light_rounded"
+                    android:hint="Create a password"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#000000"
+                    android:inputType="textPassword"/>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Sign Up"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/btn_dark_rounded"
+                android:layout_marginTop="40dp"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:id="@+id/txtLoginLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? Login"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

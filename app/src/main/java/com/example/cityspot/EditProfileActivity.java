@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class EditProfileActivity extends AppCompatActivity {
@@ -24,6 +25,9 @@ public class EditProfileActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.editPassword);
         btnSave = findViewById(R.id.btnSave);
         btnCancel = findViewById(R.id.btnCancel);
+        ImageButton btnBack = findViewById(R.id.btnBackEdit);
+
+        btnBack.setOnClickListener(v -> finish());
 
         // Load current username
         SharedPreferences prefs = getSharedPreferences("CitySpotPrefs", MODE_PRIVATE);

@@ -10,37 +10,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editRegName, editRegEmail, editRegPassword;
-    private Button btnRegisterSubmit;
-    private TextView txtBackToLogin;
+    private EditText editFullName, editUsername, editPassword;
+    private android.widget.Button btnRegister;
+    private TextView txtLoginLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        editRegName = findViewById(R.id.editRegName);
-        editRegEmail = findViewById(R.id.editRegEmail);
-        editRegPassword = findViewById(R.id.editRegPassword);
-        btnRegisterSubmit = findViewById(R.id.btnRegisterSubmit);
-        txtBackToLogin = findViewById(R.id.txtBackToLogin);
+        editFullName = findViewById(R.id.editFullName);
+        editUsername = findViewById(R.id.editUsername);
+        editPassword = findViewById(R.id.editPassword);
+        btnRegister = findViewById(R.id.btnRegister);
+        txtLoginLink = findViewById(R.id.txtLoginLink);
 
-        btnRegisterSubmit.setOnClickListener(v -> {
-            String name = editRegName.getText().toString();
-            String email = editRegEmail.getText().toString();
-            String pass = editRegPassword.getText().toString();
+        btnRegister.setOnClickListener(v -> {
+            String name = editFullName.getText().toString();
+            String username = editUsername.getText().toString();
+            String pass = editPassword.getText().toString();
 
-            if (name.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+            if (name.isEmpty() || username.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             } else {
                 // In a real app, you'd save this to a database
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                intent.putExtra("username", name);
+                intent.putExtra("username", username);
                 startActivity(intent);
                 finish();
             }
         });
 
-        txtBackToLogin.setOnClickListener(v -> finish());
+        txtLoginLink.setOnClickListener(v -> finish());
     }
 }
